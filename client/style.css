@@ -1,0 +1,54 @@
+.card {
+  margin: 15px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, .7);
+  background-color: rgba(67,157,36, .8)
+}
+.card:hover{
+box-shadow: 7px 7px 7px rgba(0, 0, 0, .3);
+}
+
+.card:active{
+box-shadow: 0px 0px 3px rgba(0, 0, 0, .3);
+}
+
+#sidebar {
+  border-right-style: solid;
+  border-width: 2px;
+}
+
+.jumbotron{
+  background-color: rgba(67,157,36,.8)
+}
+
+#input-body{
+  margin: 5px;
+}
+
+/* #input-title{
+  size: "50";
+} */
+.btn-group {
+  margin-left: 30%;
+  margin-top: 5%;
+}
+
+/* .edit {
+    visibility: hidden;
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    z-index: 1000;
+    background-color: rgb(245, 245, 250);
+    border-radius: 10px;
+  } */
+}
+/* #preview {
+  border-right-style: solid;
+  border-width: 3px
+} */
+body {
+  /* background-color: rgba(38,38,38,.7) */
+}

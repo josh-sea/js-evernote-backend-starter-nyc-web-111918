@@ -3,11 +3,53 @@
   <head>
     <meta charset="utf-8">
     <title>Evernote Clone</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="src/index.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 style="margin:5%" align="center">Welcome to EveryNotes</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-12">
+              <button id="create-note" class="btn btn-dark" style="margin-left:25%" type="button" name="new-note">Create New Note</button>
+            </div>
+          </div>
+          <div class="row">
+            <div id="sidebar" class="col-md-12">
+            </div>
+          </div>
+      </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div id="preview" class="col-md-12">
 
-    <!-- ADD YOUR HTML HERE -->
+            </div>
+          </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="edit jumbotron text-white jumbotron-fluid">
+              <div class="container">
+                <h6 id="new-edit-title" class="display-6"></h6>
+                <form id="edit-note-form" class="edit-form" action="index.html" method="post">
+                  <input id="input-title" type="text" name="edit-title" size="50" value="">
+                  ​<textarea id="input-body" rows="15" cols="70" placeholder="Text body here" value=""></textarea>
+                  <input id="hidden-id"type="hidden" name="note-id" value="">
+                  <input class="btn btn-light" type="submit" name="submit-edit" value="submit">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   </body>
 </html>
