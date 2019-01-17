@@ -6,9 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const editForm = document.querySelector('.edit');
   const inputTitle=document.querySelector('#input-title');
   const inputBody = document.querySelector('#input-body');
-  const inputId = document.querySelector('#hidden-id');
+  const inputId = document.querySelector('#abcd');
   const createNoteBtn = document.querySelector('#create-note');
+  const user3 = {user: {id: 3, name: "flatironschool"}};
+  const formTitle = document.querySelector('#new-edit-title');
   let allNotes = [];
+
 
   function renderNotes(notes){
     allNotes = notes;
@@ -96,6 +99,7 @@ getNoteFetch()
         inputTitle.value = '';
         inputBody.value = '';
         inputId.value = '';
+        formTitle.innerText = '';
         renderNote(foundNote)
     }
   })
@@ -104,7 +108,7 @@ getNoteFetch()
     if(e.target.dataset.deleteId){
       deleteFetch(e.target.dataset.deleteId)
       //uses id from delete button and deletes the item from DB nothign is returned
-      const foundNote =allNotes.find(function(note){
+      const foundNote = allNotes.find(function(note){
         return note.id == e.target.dataset.deleteId;
       })
       allNotes.splice(allNotes.indexOf(foundNote),1);
@@ -113,7 +117,8 @@ getNoteFetch()
 //end of if
     } else if (e.target.dataset.editId){
       //get edit form change visibility
-      const foundNote =allNotes.find(function(note){
+      formTitle.innerText = 'Edit your note';
+      const foundNote = allNotes.find(function(note){
         return note.id == e.target.dataset.editId;
       })
       inputTitle.value = foundNote.title;
@@ -124,17 +129,41 @@ getNoteFetch()
   }) //end of previewpane event
   editForm.addEventListener('submit',(e)=>{
       e.preventDefault()
-      console.log(inputTitle.value);
-      console.log(inputBody.value);
-      const foundNote = allNotes.find(function(note){
-        return note.id == e.target.dataset.inputId.value;
-      })
-      console.log(foundNote);
-      // foundNote.title = inputTitle.value;
-      // foundNote.body = inputBody.value
-      // patchFetch(foundNote)
-      // .then(parseJSON)
-      // .then(renderNote)
-    })//end of submit
-
+      if (inputTitle.value === '' && inputBody.value === '' && inputId.value === ''){
+      } else if (inputId.value !== ''){
+        const foundNote = allNotes.find(function(note){
+          return note.id == inputId.value;
+        })
+        foundNote.title = inputTitle.value;
+        foundNote.body = inputBody.value
+        patchFetch(foundNote)
+        .then(parseJSON)
+        .then((r) => {
+          renderNote(r);
+          renderNotes(allNotes);
+          inputTitle.value = '';
+          inputBody.value = '';
+          inputId.value = '';
+          formTitle.innerText = '';
+        })
+      } else if (inputTitle.value !== '' && inputBody.value !== '' && inputId.value === ''){
+          //create new
+          const newNote = {title: inputTitle.value, body:inputBody.value, user: user3}
+          postFetch(newNote)
+          .then(parseJSON)
+          .then((r) => {
+            allNotes.push(r)
+            renderNote(r);
+            renderNotes(allNotes);
+            inputTitle.value = '';
+            inputBody.value = '';
+            inputId.value = '';
+            formTitle.innerText = '';
+          })
+      }
+  })//end of submit
+  createNoteBtn.addEventListener('click', (e) =>{
+    previewPane.innerHTML = '';
+    formTitle.innerText = 'Create a new note!'
+  })
 }) //end of dom content loaded
